@@ -20,7 +20,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='pyreedsolomon',
-    version='1.0.1',
+    version='1.0.2',
     packages=setuptools.find_packages(),
     url='https://github.com/mugpahug/pyreedsolomon',
     license='GPL3',
