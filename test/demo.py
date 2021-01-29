@@ -2,8 +2,8 @@
 #   Creation date    : Fri Jan 29 15:28:36 2021 (+1100)
 #   Email            : edwin.g.w.petersatgmail.com
 # ------------------------------------------------------------------------------
-# Last-Updated       : Fri Jan 29 16:22:05 2021 (+1100)
-#           By       : Edwin G. W. Peters @ epeters
+# Last-Updated       : Fri Jan 29 19:40:55 2021 (+1100)
+#           By       : Edwin G.W. Peters @ mugpahug-pc
 # ------------------------------------------------------------------------------
 # File Name          : demo.py
 # Description        : 
@@ -23,7 +23,7 @@ data = np.random.randint(0,256,150).astype(np.uint8)
 data_enc = rs_dr.encode(data)
 
 # create a few errors
-err_idx = [23,53,12,97,102, 200, 250]
+err_idx = [23,53,12,97,102]
 
 
 data_enc[err_idx] = 255

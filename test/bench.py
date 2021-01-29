@@ -2,8 +2,8 @@
 #   Creation date    : Wed Jan 20 18:06:12 2021 (+1100)
 #   Email            : edwin.g.w.petersatgmail.com
 # ------------------------------------------------------------------------------
-# Last-Updated       : Fri Jan 29 16:21:52 2021 (+1100)
-#           By       : Edwin G. W. Peters @ epeters
+# Last-Updated       : Fri Jan 29 19:55:30 2021 (+1100)
+#           By       : Edwin G.W. Peters @ mugpahug-pc
 # ------------------------------------------------------------------------------
 # File Name          : bench.py
 # Description        : 
@@ -92,8 +92,9 @@ for rs_p in rs_params:
     dtypes = [np.ndarray, list,bytearray, bytes]
 
 
-    print(f'RS ({total_len}, {msg_len}, {sym_size}) -- encoding and decoding {N_TESTS} runs')
+    print(f'RS ({total_len}, {msg_len}, {sym_size}) -- encoding and decoding {N_TESTS} runs\n')
 
+    print('| test name | encoding | decoding | num errors|\n| :------- | -------: | ------: | :----: |')
 
     for dtype in dtypes:
         # bench:
@@ -132,7 +133,8 @@ for rs_p in rs_params:
         test_names.append(str(dtype)[8:-2])
         encoding_times.append((t_e1-t_b1)/N_TESTS*1000000)
         decoding_times.append((t_e2-t_b2)/N_TESTS*1000000)
-        print(f'dtype {str(dtype)[8:-2]:15} -- encoding time {t_e1-t_b1:.3f} s {(t_e1-t_b1)/N_TESTS*1000:.3f} ms each - decoding time {t_e2-t_b2:.3f} s {(t_e2-t_b2)/N_TESTS*1000:.3f} ms each - num_errors: {np.sum(n_errors<0)}')
+        print(f'| pyreedsolomon {str(dtype)[8:-2]:15} | {t_e1-t_b1:.3f} s {(t_e1-t_b1)/N_TESTS*1000:.3f} ms each | {t_e2-t_b2:.3f} s {(t_e2-t_b2)/N_TESTS*1000:.3f} ms each | {np.sum(n_errors<0)} |')
+        # print(f'dtype {str(dtype)[8:-2]:15} -- encoding time {t_e1-t_b1:.3f} s {(t_e1-t_b1)/N_TESTS*1000:.3f} ms each - decoding time {t_e2-t_b2:.3f} s {(t_e2-t_b2)/N_TESTS*1000:.3f} ms each - num_errors: {np.sum(n_errors<0)}')
 
     # np.random.seed(seed)
     data = [np.concatenate((np.zeros(padding_symbols),np.random.randint(0,16,total_len-padding_symbols))).astype(data_dtype) for n in range(N_TESTS)]
@@ -158,7 +160,8 @@ for rs_p in rs_params:
     encoding_times.append((t_e1-t_b1)/N_TESTS*1000000)
     decoding_times.append((t_e2-t_b2)/N_TESTS*1000000)
 
-    print(f'{"fast":21} -- encoding time {t_e1-t_b1:.3f} s {(t_e1-t_b1)/N_TESTS*1000:.3f} ms each - decoding time {t_e2-t_b2:.3f} s {(t_e2-t_b2)/N_TESTS*1000:.3f} ms each - num_errors: {np.sum(n_errors2<0)}')
+    print(f'| {"pyreedsolomon fast":29} | {t_e1-t_b1:.3f} s {(t_e1-t_b1)/N_TESTS*1000:.3f} ms each | {t_e2-t_b2:.3f} s {(t_e2-t_b2)/N_TESTS*1000:.3f} ms each | {np.sum(n_errors2<0)} |')
+    # print(f'{"fast":21} -- encoding time {t_e1-t_b1:.3f} s {(t_e1-t_b1)/N_TESTS*1000:.3f} ms each - decoding time {t_e2-t_b2:.3f} s {(t_e2-t_b2)/N_TESTS*1000:.3f} ms each - num_errors: {np.sum(n_errors2<0)}')
 
 
 
@@ -197,8 +200,9 @@ for rs_p in rs_params:
         encoding_times.append((t_pe1-t_pb1)/N_TESTS*1000000)
         decoding_times.append((t_pe2-t_pb2)/N_TESTS*1000000)
 
+        print(f'| {"py unireedsolomon":29} | {t_pe1-t_pb1:.3f} s {(t_pe1-t_pb1)/N_TESTS*1000:.3f} ms each | {t_pe2-t_pb2:.3f} s {(t_pe2-t_pb2)/N_TESTS*1000:.3f} ms each | {np.sum(n_errors_py<0)} |')
 
-        print(f'{"py unireedsolomon":21} -- encoding time {t_pe1-t_pb1:.3f} s {(t_pe1-t_pb1)/N_TESTS*1000:.3f} ms each - decoding time {t_pe2-t_pe1:.3f} s {(t_pe2-t_pe1)/N_TESTS*1000:.3f} ms each - num_errors: {np.sum(n_errors_py!=0)}')
+        # print(f'{"py unireedsolomon":21} -- encoding time {t_pe1-t_pb1:.3f} s {(t_pe1-t_pb1)/N_TESTS*1000:.3f} ms each - decoding time {t_pe2-t_pe1:.3f} s {(t_pe2-t_pe1)/N_TESTS*1000:.3f} ms each - num_errors: {np.sum(n_errors_py!=0)}')
 
     ## reedsolo
     if HAS_REEDSOLO and  sym_size <= 8: # only works for symbol sizes up to 8
@@ -230,7 +234,8 @@ for rs_p in rs_params:
         decoding_times.append((t_pe2-t_pb2)/N_TESTS*1000000)
 
 
-        print(f'{"py reedsolo":21} -- encoding time {t_pe1-t_pb1:.3f} s {(t_pe1-t_pb1)/N_TESTS*1000:.3f} ms each - decoding time {t_pe2-t_pe1:.3f} s {(t_pe2-t_pe1)/N_TESTS*1000:.3f} ms each - num_errors: {np.sum(n_errors_py!=0)}')
+        print(f'| {"py reedsolo":29} | {t_pe1-t_pb1:.3f} s {(t_pe1-t_pb1)/N_TESTS*1000:.3f} ms each | {t_pe2-t_pb2:.3f} s {(t_pe2-t_pb2)/N_TESTS*1000:.3f} ms each | {np.sum(n_errors_py<0)} |')
+        # print(f'{"py reedsolo":21} -- encoding time {t_pe1-t_pb1:.3f} s {(t_pe1-t_pb1)/N_TESTS*1000:.3f} ms each - decoding time {t_pe2-t_pe1:.3f} s {(t_pe2-t_pe1)/N_TESTS*1000:.3f} ms each - num_errors: {np.sum(n_errors_py!=0)}')
 
 
 

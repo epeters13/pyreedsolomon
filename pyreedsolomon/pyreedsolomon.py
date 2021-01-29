@@ -2,8 +2,8 @@
 #   Creation date    : Wed Jan 20 17:15:53 2021 (+1100)
 #   Email            : edwin.g.w.petersatgmail.com
 # ------------------------------------------------------------------------------
-# Last-Updated       : Fri Jan 29 16:23:34 2021 (+1100)
-#           By       : Edwin G. W. Peters @ epeters
+# Last-Updated       : Fri Jan 29 19:35:51 2021 (+1100)
+#           By       : Edwin G.W. Peters @ mugpahug-pc
 # ------------------------------------------------------------------------------
 # File Name          : pyreedsolomon.py
 # Description        : 
@@ -24,8 +24,10 @@ configure with prefix=/usr/lib or add default prefix to LD_LIBRARY_PATH
 import ctypes
 import numpy as np
 
-lib = ctypes.cdll.LoadLibrary('librs.so')
-
+try:
+    lib = ctypes.cdll.LoadLibrary('librs.so')
+except Exception as e:
+    raise ImportError('librs.so not found in LD_LIBRARY_PATH. Is the Reed Solomon userspace module installed?') from e
 # pointers
 c_dat_p8 =  ctypes.POINTER(ctypes.c_ubyte)
 c_dat_p16 =  ctypes.POINTER(ctypes.c_ushort)
@@ -206,13 +208,13 @@ class Reed_Solomon(object):
         self.encode_fast(self.data_buf)
 
         if d_type == np.ndarray:
-            return self.data_buf
+            return self.data_buf[-n_symbols-self.par_size:]
         elif d_type == bytes:
-            return self.data_buf.tobytes()
+            return self.data_buf[-n_symbols-self.par_size:].tobytes()
         elif d_type == bytearray:
-            return bytearray(self.data_buf.tobytes())
+            return bytearray(self.data_buf[-n_symbols-self.par_size:].tobytes())
         elif d_type == list:
-            return self.data_buf.tolist()
+            return self.data_buf[-n_symbols-self.par_size:].tolist()
 
 
     def decode(self,dat):
@@ -258,10 +260,10 @@ class Reed_Solomon(object):
         self.data_buf, n_errors = self.decode_fast(self.data_buf)
 
         if d_type == np.ndarray:
-            return self.data_buf[:self.message_size], n_errors
+            return self.data_buf[self.message_size - n_symbols + self.par_size :self.message_size], n_errors
         elif d_type == bytes:
-            return self.data_buf[:self.message_size].tobytes(), n_errors
+            return self.data_buf[self.message_size - n_symbols + self.par_size:self.message_size].tobytes(), n_errors
         elif d_type == bytearray:
-            return bytearray(self.data_buf[:self.message_size].tobytes()) , n_errors
+            return bytearray(self.data_buf[self.message_size - n_symbols + self.par_size:self.message_size].tobytes()) , n_errors
         elif d_type == list:
-            return self.data_buf[:self.message_size].tolist(), n_errors
+            return self.data_buf[self.message_size - n_symbols + self.par_size:self.message_size].tolist(), n_errors
