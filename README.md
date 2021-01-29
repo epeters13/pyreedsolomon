@@ -29,14 +29,14 @@ data = np.random.randint(0,256,150).astype(np.uint8)
 data_enc = rs_dr.encode(data)
 
 # create a few errors
-err_idx = [23,53,12,97,102, 200, 250]
+err_idx = [23,53,12,97,102]
 
 
 data_enc[err_idx] = 255
 
 data_dec, n_errors = rs_dr.decode(data_enc)
 
-verify = np.all(data_dec[-len(data):]==data)
+verify = np.all(data_dec==data)
 
 print(f"Decoding succes: {verify}. errors corrected {n_errors}")
 ```
