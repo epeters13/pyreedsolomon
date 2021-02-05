@@ -5,15 +5,17 @@ See more on [https://github.com/mugpahug/pyreedsolomon](https://github.com/mugpa
 
 **Author**: Edwin G.W. Peters
 
+Using the userspace reed-solomon interface to the Linux kernel from [https://github.com/CyberLeo/reed-solomon](https://github.com/CyberLeo/reed-solomon)
 
 ## Requirements
-Userspace interface to the kernel Reed Solomon libraries and numpy
-Source and build instructions on [https://github.com/CyberLeo/reed-solomon](https://github.com/CyberLeo/reed-solomon)
-
-configure with --prefix=/usr/ or add the location of *librs.so* is in your library path (*LD_LIBRARY_PATH*)
+numpy
 
 ## Installation
 pip install pyreedsolomon
+
+or
+
+python setup.py install
 
 ## Usage
 This library provides fast methods where the user needs to allocate the buffers and handle padding as well as easy-to-use methods that have a slightly lower performance
