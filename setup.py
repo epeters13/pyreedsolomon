@@ -2,7 +2,7 @@
 #   Creation date    : Fri Jan 29 15:19:20 2021 (+1100)
 #   Email            : edwin.g.w.petersatgmail.com
 # ------------------------------------------------------------------------------
-# Last-Updated       : Fri Feb  5 18:24:05 2021 (+1100)
+# Last-Updated       : Fri Feb  5 18:30:30 2021 (+1100)
 #           By       : Edwin G. W. Peters @ epeters
 # ------------------------------------------------------------------------------
 # File Name          : setup.py
@@ -40,7 +40,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='pyreedsolomon',
-    version='1.0.3',
+    version='1.1.0',
     packages=setuptools.find_packages(),
     url='https://github.com/mugpahug/pyreedsolomon',
     license='GPL3',
