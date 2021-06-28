@@ -2,7 +2,7 @@
 #   Creation date    : Fri Jan 29 15:19:20 2021 (+1100)
 #   Email            : edwin.g.w.petersatgmail.com
 # ------------------------------------------------------------------------------
-# Last-Updated       : Fri Feb  5 18:30:30 2021 (+1100)
+# Last-Updated       : Fri Apr 23 13:23:00 2021 (+1000)
 #           By       : Edwin G. W. Peters @ epeters
 # ------------------------------------------------------------------------------
 # File Name          : setup.py
@@ -15,7 +15,7 @@
 import setuptools
 from git_helpers import check_git_submodules
 
-
+from setuptools.command.build_ext import build_ext
 
 # init the reed-solomon userspace kernel interface library
 check_git_submodules()
@@ -40,7 +40,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='pyreedsolomon',
-    version='1.1.0',
+    version='1.1.2',
     packages=setuptools.find_packages(),
     url='https://github.com/mugpahug/pyreedsolomon',
     license='GPL3',
@@ -61,5 +61,5 @@ setuptools.setup(
     install_requires=[
         'numpy'
     ],
-    ext_modules = [reed_solomon]
+    ext_modules = [reed_solomon],
 )

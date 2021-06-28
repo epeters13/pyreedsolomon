@@ -2,7 +2,7 @@
 #   Creation date    : Wed Jan 20 17:15:53 2021 (+1100)
 #   Email            : edwin.g.w.petersatgmail.com
 # ------------------------------------------------------------------------------
-# Last-Updated       : Fri Feb  5 17:46:43 2021 (+1100)
+# Last-Updated       : Fri Apr 23 13:28:16 2021 (+1000)
 #           By       : Edwin G. W. Peters @ epeters
 # ------------------------------------------------------------------------------
 # File Name          : pyreedsolomon.py
@@ -22,7 +22,13 @@ import os.path
 import site
 
 file_path = os.path.realpath(__file__).strip(os.path.basename(__file__))
-RS_LIB_FILE = 'librs.cpython-38-x86_64-linux-gnu.so'
+lib_loc = os.listdir(file_path + '../') 
+# print(f'{lib_loc=}')
+for l in lib_loc:
+    if 'librs.cpython' in l and '.so' in l:
+        RS_LIB_FILE = l
+        break
+# RS_LIB_FILE = 'librs.cpython-38-x86_64-linux-gnu.so'
 
 lib = ctypes.cdll.LoadLibrary(file_path + '../' + RS_LIB_FILE)
 
