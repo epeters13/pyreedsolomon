@@ -21,7 +21,7 @@ from setuptools.command.build_ext import build_ext
 check_git_submodules()
 
 # HACK we need to make the config.h file.  All our config parameters are provided already, so it can be empty
-open('reed-solomon/src/config.h','a').close()
+open('reed-solomon/src/config.h', 'a').close()
 
 
 reed_solomon = setuptools.Extension('librs',
@@ -40,7 +40,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='pyreedsolomon',
-    version='1.1.2',
+    version='1.1.3',
     packages=setuptools.find_packages(),
     url='https://github.com/epeters13/pyreedsolomon',
     license='GPL3',
