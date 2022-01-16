@@ -6,7 +6,7 @@
 #           By       : Edwin G. W. Peters @ epeters
 # ------------------------------------------------------------------------------
 # File Name          : setup.py
-# Description        : 
+# Description        :
 # ------------------------------------------------------------------------------
 # Copyright          : GPLV3
 # ------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ from setuptools.command.build_ext import build_ext
 
 # init the reed-solomon userspace kernel interface library
 check_git_submodules()
-    
+
 # HACK we need to make the config.h file.  All our config parameters are provided already, so it can be empty
 open('reed-solomon/src/config.h','a').close()
 
@@ -42,7 +42,7 @@ setuptools.setup(
     name='pyreedsolomon',
     version='1.1.2',
     packages=setuptools.find_packages(),
-    url='https://github.com/mugpahug/pyreedsolomon',
+    url='https://github.com/epeters13/pyreedsolomon',
     license='GPL3',
     author='Edwin G. W. Peters',
     author_email='edwin.g.w.peters@gmail.com',
