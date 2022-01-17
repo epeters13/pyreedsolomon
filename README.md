@@ -1,7 +1,7 @@
 # pyreedsolomon
 A high performance Python interface to the linux kernel Reed Solomon libraries
 
-See more on [https://github.com/mugpahug/pyreedsolomon](https://github.com/mugpahug/pyreedsolomon)
+See more on [https://github.com/epeters13/pyreedsolomon](https://github.com/epeters13/pyreedsolomon)
 
 **Author**: Edwin G.W. Peters
 
